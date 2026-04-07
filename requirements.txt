@@ -4,3 +4,5 @@ pyaml
 django-recurrence
 python-decouple==3.3
 pandas
+djangorestframework
+django-cors-headers
