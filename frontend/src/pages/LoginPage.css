@@ -1,0 +1,81 @@
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.login-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+}
+.login-card {
+  padding: 40px 36px;
+}
+.login-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.login-title {
+  font-size: 2rem;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+}
+.login-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+.login-btn {
+  width: 100%;
+  margin-top: 8px;
+}
+.login-footer {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-color);
+  text-align: center;
+}
+.login-footer p {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+}
+.login-footer a {
+  color: var(--accent-secondary);
+  font-weight: 600;
+}
+/* Decorative orbs */
+.login-decoration {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.login-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+}
+.login-orb-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--accent-primary);
+  top: -100px;
+  right: -100px;
+}
+.login-orb-2 {
+  width: 300px;
+  height: 300px;
+  background: var(--accent-secondary);
+  bottom: -80px;
+  left: -80px;
+}
