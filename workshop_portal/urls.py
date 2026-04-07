@@ -13,8 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url, include
+# from django.conf.urls import url
+from django.urls import re_path as url, include
 from django.conf.urls.static import static
+from django.urls import path
 from django.contrib import admin
 from workshop_portal import views
 from django.conf import settings
@@ -27,6 +29,8 @@ urlpatterns = [
     url(r'^reset/', include('django.contrib.auth.urls')),
     url(r'^page/', include('cms.urls')),
     url(r'^statistics/', include('statistics_app.urls')),
+    path('api/', include('workshop_app.api_urls')),
+    path('api/statistics/', include('statistics_app.api_urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
