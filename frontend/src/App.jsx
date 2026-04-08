@@ -37,12 +37,15 @@ function HomeRedirect() {
   return <Navigate to="/login" replace />;
 }
 
+import { ThemeProvider } from './context/ThemeContext';
+
 function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <ToastProvider>
-          <Navbar />
+    <ThemeProvider>
+      <BrowserRouter>
+        <AuthProvider>
+          <ToastProvider>
+            <Navbar />
           <Routes>
             <Route path="/" element={<HomeRedirect />} />
             <Route path="/login" element={<LoginPage />} />
@@ -87,6 +90,7 @@ function App() {
         </ToastProvider>
       </AuthProvider>
     </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

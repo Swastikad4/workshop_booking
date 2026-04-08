@@ -1,15 +1,28 @@
 import { useState, useRef, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useTheme } from '../context/ThemeContext';
 import './Navbar.css';
 
 export default function Navbar() {
   const { user, logoutUser } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
+  // Handle scroll effect for navbar styling
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Handle clicking outside of the user dropdown
   useEffect(() => {
     function handleClickOutside(e) {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -33,84 +46,82 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="navbar">
-      <div className="navbar-inner">
+    <nav className={`navbar-wrapper ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="navbar-pill">
+        {/* Brand Section */}
         <Link to={user ? '/dashboard' : '/login'} className="navbar-brand">
-          FOSSEE <span>Workshops</span>
+          FOSSEE <span className="brand-accent">Workshops</span>
         </Link>
 
-        <button
-          className="navbar-mobile-toggle"
-          onClick={() => setMobileOpen(!mobileOpen)}
-        >
-          ☰
-        </button>
-
-        <ul className={`navbar-links ${mobileOpen ? 'open' : ''}`}>
+        {/* Desktop Links */}
+        <ul className={`navbar-links ${mobileOpen ? 'mobile-active' : ''}`}>
           <li>
-            <NavLink to="/" onClick={() => setMobileOpen(false)}>Home</NavLink>
+            <NavLink to="/" onClick={() => setMobileOpen(false)}>
+              <span className="nav-icon">🏠</span> Home
+            </NavLink>
           </li>
           <li>
             <NavLink to="/statistics" onClick={() => setMobileOpen(false)}>
-              Workshop Statistics
+              <span className="nav-icon">📊</span> Statistics
             </NavLink>
           </li>
+
           {user && (
             <>
-              {user.is_instructor && (
-                <li>
-                  <NavLink to="/statistics/team" onClick={() => setMobileOpen(false)}>
-                    Team Statistics
-                  </NavLink>
-                </li>
-              )}
               <li>
                 <NavLink to="/dashboard" onClick={() => setMobileOpen(false)}>
-                  Workshop Status
+                  Status
                 </NavLink>
               </li>
               {!user.is_instructor && (
                 <li>
                   <NavLink to="/propose-workshop" onClick={() => setMobileOpen(false)}>
-                    Propose Workshop
+                    Propose
                   </NavLink>
                 </li>
               )}
-              <li>
-                <NavLink to="/workshop-types" onClick={() => setMobileOpen(false)}>
-                  Workshop Types
-                </NavLink>
-              </li>
             </>
           )}
         </ul>
 
+        {/* User / Auth Section */}
         <div className="navbar-right">
-          {user && (
-            <div className="navbar-user" ref={dropdownRef}>
+          <button 
+            className="theme-toggle" 
+            onClick={toggleTheme}
+            aria-label="Toggle Theme"
+          >
+            {theme === 'light' ? '🌙' : '☀️'}
+          </button>
+
+          {user ? (
+            <div className="user-menu-container" ref={dropdownRef}>
               <button
-                className="navbar-user-btn"
+                className="user-pill-btn"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
               >
-                <span className="navbar-user-icon">{getInitials()}</span>
-                {user.full_name || user.username}
-                <span style={{ fontSize: '0.6rem', opacity: 0.6 }}>▼</span>
+                <div className="avatar-circle">{getInitials()}</div>
+                <span className="user-label">{user.full_name || user.username}</span>
+                <span className="chevron">▾</span>
               </button>
+
               {dropdownOpen && (
-                <div className="navbar-dropdown">
-                  <Link to="/profile" onClick={() => setDropdownOpen(false)}>
-                    Profile
-                  </Link>
-                  <a href="http://127.0.0.1:8000/reset/password_change/"
-                     onClick={() => setDropdownOpen(false)}>
-                    Change Password
-                  </a>
-                  <div className="navbar-dropdown-divider" />
-                  <button onClick={handleLogout}>Logout</button>
+                <div className="user-dropdown-card">
+                  <Link to="/profile" onClick={() => setDropdownOpen(false)}>Profile</Link>
+                  <a href="http://127.0.0.1:8000/reset/password_change/">Security</a>
+                  <div className="dropdown-divider" />
+                  <button onClick={handleLogout} className="logout-action">Logout</button>
                 </div>
               )}
             </div>
+          ) : (
+            <Link to="/login" className="login-btn-pill">Sign In</Link>
           )}
+
+          {/* Hamburger for Mobile */}
+          <button className="hamburger" onClick={() => setMobileOpen(!mobileOpen)}>
+            {mobileOpen ? '✕' : '☰'}
+          </button>
         </div>
       </div>
     </nav>

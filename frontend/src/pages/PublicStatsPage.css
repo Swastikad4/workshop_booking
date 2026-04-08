@@ -1,16 +1,207 @@
+/* ==========================================================================
+   Public Stats Page - Adaptive Theme
+   ========================================================================== */
+
+.page-content:has(.stats-layout) {
+  background: var(--bg-primary);
+  min-height: 100vh;
+  transition: background var(--transition-base);
+}
+
+/* Base Layout Config */
 .stats-layout {
   display: grid;
   grid-template-columns: 280px 1fr;
-  gap: 24px;
+  gap: 32px;
   align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
 .stats-sidebar {
   position: sticky;
-  top: 88px;
+  top: 100px;
 }
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+.stats-layout .section-card {
+  background: var(--bg-secondary);
+  border-radius: 20px;
+  padding: 35px 30px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.35s ease;
+}
+
+.stats-layout .section-card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.stats-layout .section-title,
+.stats-layout .section-card h3 {
+  color: var(--text-primary);
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: -0.02em;
+}
+
+.stats-layout .section-title {
+    margin-bottom: 24px;
+}
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+.stats-layout .form-group {
+  margin-bottom: 20px;
+}
+
+.stats-layout .form-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.stats-layout .form-input,
+.stats-layout .form-select {
+  width: 100%;
+  padding: 14px 15px;
+  background: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.stats-layout .form-input:focus,
+.stats-layout .form-select:focus {
+  border-color: var(--accent-primary);
+  background: var(--bg-secondary);
+  box-shadow: 0 0 0 3px var(--neon-lime-glow);
+}
+
+/* Dropdown specific text fix */
+.stats-layout .form-select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.stats-layout .btn {
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s ease, background 0.2s ease, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* Secondary Button (Clear, Prev/Next) */
+.stats-layout .btn-secondary {
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+.stats-layout .btn-secondary:hover:not(:disabled) {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* Primary Button (Adapts to theme) */
+.stats-layout .btn-primary {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+.stats-layout .btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* Success Button (Neon Lime Action) */
+.stats-layout .btn-success {
+  background: var(--neon-lime);
+  color: #111111;
+}
+.stats-layout .btn-success:hover {
+  filter: brightness(1.1);
+}
+
+.stats-layout .btn:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Data Table
+   ========================================================================== */
+.stats-layout .data-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 5px;
+}
+
+.stats-layout .data-table th {
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.stats-layout .data-table th:first-child {
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+.stats-layout .data-table th:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.stats-layout .data-table td {
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  vertical-align: middle;
+}
+
+.stats-layout .data-table tbody tr:hover td {
+  background: var(--bg-input);
+}
+
+.stats-layout .data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Chart Canvas Fix */
+.stats-layout .stats-main canvas {
+  margin-top: 10px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.03));
+}
+
 @media (max-width: 900px) {
   .stats-layout {
     grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 0 10px;
   }
   .stats-sidebar {
     position: static;
