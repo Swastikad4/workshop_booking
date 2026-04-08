@@ -359,54 +359,6 @@
   transform: scale(0.98);
 }
 
-/* Social Login */
-.arise-social-login {
-  position: relative;
-  text-align: center;
-  padding-top: 5px;
-}
-
-.arise-social-login::before {
-  content: "";
-  position: absolute;
-  top: 18px;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: #f3f4f6;
-  z-index: 1;
-}
-
-.arise-social-login p {
-  display: inline-block;
-  background: var(--card-bg);
-  padding: 0 16px;
-  font-size: 0.8rem;
-  color: #9ca3af;
-  position: relative;
-  z-index: 2;
-  margin-bottom: 20px;
-}
-
-.arise-social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-}
-
-.arise-social-btn {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
-}
-
 .arise-page-footer {
   text-align: center;
   margin-top: 25px;

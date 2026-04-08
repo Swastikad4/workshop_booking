@@ -3,6 +3,7 @@ import api from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import SEO from '../components/SEO';
 import './PublicStatsPage.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -58,6 +59,10 @@ export default function PublicStatsPage() {
 
   return (
     <div className="page-content">
+      <SEO 
+        title="Impact Statistics" 
+        description="Explore the reach and impact of FOSSEE Workshops across India. Visualize data by state, workshop type, and timeline."
+      />
       <div className="container-fluid" style={{maxWidth:1400,margin:'0 auto',padding:'0 24px'}}>
         <div className="stats-layout">
           {/* Filter Sidebar */}

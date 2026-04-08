@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Allow: /login
+Allow: /register
+Allow: /statistics
+
+Sitemap: https://workshops.fossee.in/sitemap.xml

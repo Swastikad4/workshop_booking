@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../components/Toast';
+import SEO from '../components/SEO';
 import './RegisterPage.css';
 
 const DEPARTMENT_CHOICES = [
@@ -102,6 +103,10 @@ export default function RegisterPage() {
 
   return (
     <div className="register-page">
+      <SEO 
+        title="Create Account" 
+        description="Join FOSSEE Workshops at IIT Bombay. Register as a coordinator to facilitate workshops in your institution."
+      />
       <div className="register-container animate-fade-in-up">
         <div className="register-card glass-card">
           <div className="register-header">
